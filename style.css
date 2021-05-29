@@ -1,0 +1,18 @@
+nav{
+    background-color: rgb(0, 69, 129);
+}
+
+a{
+    color: white;
+}
+a:hover{
+    color:white;
+    font-weight: bold;
+}
+
+footer{
+    background-color: rgb(0, 69, 129);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
