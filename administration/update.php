@@ -1,3 +1,46 @@
+<?php
+    $title = $_POST['title'];
+    $description = $_POST['description'];
+    $short = $_POST['short'];
+    $category = $_POST['category'];
+    $date = date('d-m-Y');
+    $imgPath = '../images/1.jpg';
+    $checked = isset($_POST['prikaz']);
+    $id = $_POST['id'];
+
+
+    $picture = $_FILES['picture']['name'];
+
+    $target_dir = '../images/'.$picture;
+    move_uploaded_file($_FILES["picture"]["tmp_name"], $target_dir);
+
+
+    $dbc = mysqli_connect('localhost', 'root', '', 'el_debate') or die('Connection failed' . myslqi_error());
+
+    if($dbc && $checked && isset($_POST['update'])){
+
+        $sql="UPDATE posts SET title = ?, shortTitle = ?, description = ?, category = ?, time = ?, imagePath = ? where id = ?";
+
+        $stmt=mysqli_stmt_init($dbc);
+
+        if (mysqli_stmt_prepare($stmt, $sql)){
+
+            mysqli_stmt_bind_param($stmt, 'sssssss', $title, $short, $description, $category, $date, $target_dir, $id);
+
+            mysqli_stmt_execute($stmt);
+        }       
+    }
+
+    
+    if(isset($_POST['delete'])){
+        $id=$_POST['id'];
+        $query = "DELETE FROM posts WHERE id=$id ";
+        $result =  mysqli_query($dbc, $query);
+    }
+
+    mysqli_close($dbc);
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -29,14 +72,15 @@
                     <a class="nav-link" href="../create/create.html">Create</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="login.html">Login</a>
+                    <a class="nav-link" href="../login/login.html">Login</a>
                   </li>
               </ul>
         </nav>
 
         <!--main section-->
-        <div class="container">
-            <p>You have been logged out!</p>
+        <div class="container" id="mundo">
+            <p>Post updated!</p>
+            <a href="../index.php">Check it out here!</a>
         </div>
 
         <!--footer-->
@@ -47,9 +91,3 @@
         </footer>
     </body>
 </html>
-<?php
-    session_start();
-
-    $_SESSION['name'] = null;
-    $_SESSION['role'] = null;
-?>

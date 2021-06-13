@@ -17,34 +17,43 @@
                   <a class="nav-link" href="../index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../index.php#mundo">Mundo</a>
+                  <a class="nav-link" href="../mundo.php">Mundo</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../index.php#deporte">Desporte</a>
+                  <a class="nav-link" href="../deporte.php">Desporte</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../login/login.html">Administracija</a>
+                  <a class="nav-link" href="../administration/administration.php">Administracija</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Create</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../login/login.html">Login</a>
+                  </li>
               </ul>
         </nav>
 
         <!--main section-->
         <div class="container">
-            <form action="create.php" method="POST">
+            <form enctype="multipart/form-data" action="create.php" method="POST">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="Enter username">
+                  <input type="text" class="form-control" id="title" name="title" placeholder="Naslov">
+                  <span id="porukaTitle"></span>
                 </div>
 
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <input type="text" class="form-control" id="description" name="description" placeholder="Password">
+                  <textarea class="form-control" id="description" name="description" placeholder="Tekst"></textarea>
+                  <span id="porukaContent"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="short">Short title</label>
-                    <input type="text" class="form-control" id="short" name="short" placeholder="Enter name">
-                </div>
+                    <input type="text" class="form-control" id="short" name="short" placeholder="Kratak naslov">
+                    <span id="porukaAbout"></span>
+                  </div>
 
                 <div class="form-group">
                     <label for="category">Category</label>
@@ -54,15 +63,82 @@
                     </select>
                   </div>
 
-                <button type="submit" class="btn btn-primary">Create</button>
+                  <div class="form-group">
+                    <input type="file" id="picture" name="picture">
+                    <span id="porukaSlika"></span>
+                  </div>
+                  <div class="form-group">
+                  <label for="prikaz">Prikaži na stranici</label>
+                <input type="checkbox" class="fonr-control" id="prikaz" name="prikaz" value="prikaz">
+              </div><br>
+                <button type="submit" id="slanje" class="btn btn-primary">Create</button>
               </form>
         </div>
 
         <!--footer-->
         <footer class="text-lg-start">
             <div class="p-3" style="color: white;">
-                © Copyright EL DEBATE. Todos los derechos reservados
+                © Copyright Patrick Deisinger
             </div>
         </footer>
+        <script type="text/javascript">
+          // Provjera forme prije slanja
+          document.getElementById("slanje").onclick = function(event) {
+         
+          var slanjeForme = true;
+         
+          // Naslov vjesti (5-30 znakova)
+          var poljeTitle = document.getElementById("title");
+          var title = document.getElementById("title").value;
+          if (title.length > 5 && title.length < 30) {
+          slanjeForme = false;
+          poljeTitle.style.border="1px dashed red";
+          document.getElementById("porukaTitle").innerHTML="Naslov vjesti mora imati između 5 i 30 znakova!<br>";
+          } else {
+          poljeTitle.style.border="1px solid green";
+          document.getElementById("porukaTitle").innerHTML="";
+          }
+         
+          // Kratki sadržaj (10-100 znakova)
+          var poljeAbout = document.getElementById("short");
+          var about = document.getElementById("short").value;
+          if (about.length > 10 && about.length < 100) {
+          slanjeForme = false;
+          poljeAbout.style.border="1px dashed red";
+          document.getElementById("porukaAbout").innerHTML="Kratki sadržaj mora imati između 10 i 100 znakova!<br>";
+          } else {
+          poljeAbout.style.border="1px solid green";
+          document.getElementById("porukaAbout").innerHTML="";
+          }
+          // Sadržaj mora biti unesen
+          var poljeContent = document.getElementById("description");
+          var content = document.getElementById("description").value;
+          if (content.length == 0) {
+          slanjeForme = false;
+          poljeContent.style.border="1px dashed red";
+          document.getElementById("porukaContent").innerHTML="Sadržaj mora biti unesen!<br>";
+          } else {
+          poljeContent.style.border="1px solid green";
+         10
+          document.getElementById("porukaContent").innerHTML="";
+          }
+          // Slika mora biti unesena
+          var poljeSlika = document.getElementById("picture");
+          var pphoto = document.getElementById("picture").value;
+          if (pphoto.length == 0) {
+          slanjeForme = false;
+          poljeSlika.style.border="1px dashed red";
+          document.getElementById("porukaSlika").innerHTML="Slika mora biti unesena!<br>";
+          } else {
+          poljeSlika.style.border="1px solid green";
+          document.getElementById("porukaSlika").innerHTML="";
+          }
+         
+          if (slanjeForme != true) {
+          event.preventDefault();
+          }
+         
+          };
+          </script>
     </body>
 </html>

@@ -40,7 +40,7 @@
             <img src="images/logo.png" style="height: 50px; margin: 0 auto; display: block;">
             <?php
               session_start();
-              if($_SESSION['name'])
+              if(isset($_SESSION['name']))
                 echo 'You are logged in as '. $_SESSION['name'];
 
             ?>
@@ -50,21 +50,20 @@
                   <a class="nav-link" href="../index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../index.php#mundo">Mundo</a>
+                  <a class="nav-link" href="mundo.php">Mundo</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../index.php#deporte">Desporte</a>
+                  <a class="nav-link" href="deporte.php">Desporte</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../login/login.html">Administracija</a>
+                  <a class="nav-link" href="../administration/administration.php">Administracija</a>
                 </li>
-                <?php
-
-                  if($_SESSION['role']=='admin')
-                    echo '<li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link" href="create/create.html">Create</a>
-                  </li>';
-                ?>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="login/login.html">Login</a>
+                  </li>
               </ul>
         </nav>
 
@@ -80,7 +79,7 @@
         <!--footer-->
         <footer class="text-lg-start">
             <div class="p-3" style="color: white;">
-                © Copyright EL DEBATE. Todos los derechos reservados
+                © Copyright Patrick Deisinger
             </div>
         </footer>
     </body>

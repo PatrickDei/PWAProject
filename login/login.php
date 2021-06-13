@@ -59,14 +59,19 @@
                   <a class="nav-link" href="../index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../index.php#mundo">Mundo</a>
+                  <a class="nav-link" href="../mundo.php">Mundo</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../index.php#deporte">Desporte</a>
+                  <a class="nav-link" href="../deporte.php">Desporte</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../login/login.html">Administracija</a>
-                </li>
+                  <a class="nav-link" href="../administration/administration.php">Administracija</a>
+                </li><li class="nav-item">
+                    <a class="nav-link" href="../create/create.html">Create</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                  </li>
               </ul>
         </nav>
 
@@ -78,7 +83,7 @@
         <!--footer-->
         <footer class="text-lg-start">
             <div class="p-3" style="color: white;">
-                © Copyright EL DEBATE. Todos los derechos reservados
+                © Copyright Patrick Deisinger
             </div>
         </footer>
     </body>

@@ -5,10 +5,18 @@
     $category = $_POST['category'];
     $date = date('d-m-Y');
     $imgPath = '../images/1.jpg';
+    $checked = isset($_POST['prikaz']);
+
+
+    $picture = $_FILES['picture']['name'];
+
+    $target_dir = '../images/'.$picture;
+    move_uploaded_file($_FILES["picture"]["tmp_name"], $target_dir);
+
 
     $dbc = mysqli_connect('localhost', 'root', '', 'el_debate') or die('Connection failed' . myslqi_error());
 
-    if($dbc){
+    if($dbc && $checked){
 
         $sql="INSERT INTO posts (title, shortTitle, description, category, time, imagePath) values (?, ?, ?, ?, ?, ?)";
 
@@ -16,7 +24,7 @@
 
         if (mysqli_stmt_prepare($stmt, $sql)){
 
-            mysqli_stmt_bind_param($stmt, 'ssssss', $title, $short, $description, $category, $date, $imgPath);
+            mysqli_stmt_bind_param($stmt, 'ssssss', $title, $short, $description, $category, $date, $target_dir);
 
             mysqli_stmt_execute($stmt);
         }       
@@ -44,14 +52,20 @@
                   <a class="nav-link" href="../index.php">Home</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../index.php#mundo">Mundo</a>
+                  <a class="nav-link" href="../mundo.php">Mundo</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../index.php#deporte">Desporte</a>
+                  <a class="nav-link" href="../deporte.php">Desporte</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="../login/login.html">Administracija</a>
+                  <a class="nav-link" href="../administration/administration.php">Administracija</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../create/create.html">Create</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="../login/login.html">Login</a>
+                  </li>
               </ul>
         </nav>
 
@@ -64,7 +78,7 @@
         <!--footer-->
         <footer class="text-lg-start">
             <div class="p-3" style="color: white;">
-                © Copyright EL DEBATE. Todos los derechos reservados
+                © Copyright Patrick Deisinger
             </div>
         </footer>
     </body>
